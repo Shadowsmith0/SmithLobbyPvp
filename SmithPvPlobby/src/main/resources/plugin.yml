@@ -1,0 +1,21 @@
+name: LobbyPvP
+version: '1.0.0'
+main: us.asooner.lobbypvp.LobbyPvPPlugin
+api-version: '1.21'
+authors: [ "Smith the CEO of Asooner" ]
+softdepend: [ ajParkour ]
+description: LobbyPvP by Smith the CEO of Asooner - a fully-configurable PvP kit plugin with a toggle-by-holding system, right-click ability and kill effects.
+
+commands:
+  lobbypvp:
+    aliases: [ hubpvp, lpvp ]
+    description: LobbyPvP core command.
+    usage: /lobbypvp <help|reload>
+
+permissions:
+  lobbypvp.reload:
+    description: Allows reloading the LobbyPvP configuration.
+    default: op
+  lobbypvp.bypass:
+    description: Bypasses the lobby PvP restrictions (won't be given a kit / can't be attacked). NOT given by default to anyone, including OPs - grant it manually to whoever should be excluded (e.g. a staff-invisible admin).
+    default: false

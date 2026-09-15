@@ -1,0 +1,229 @@
+# =====================================================
+#                     LobbyPvP
+#  Full control config: worlds, items, cooldowns,
+#  kill effects and every message the plugin sends.
+# =====================================================
+
+# --------------------------------------------------
+# General
+# --------------------------------------------------
+
+# Seconds of delay before PvP actually turns ON / OFF after picking up / dropping the sword.
+# Set to 0 to make it instant.
+enable-cooldown: 3
+disable-cooldown: 3
+
+# If a player is still holding the sword when the "enable" countdown finishes, PvP turns on.
+# If they switched away from the sword slot before it finished, the activation is cancelled.
+
+# Turn this on if you have another plugin (like an inventory-clear / lobby plugin) that
+# might wipe the player's inventory right after join, so the kit needs to be re-applied a
+# moment later instead of instantly.
+delay-before-giving-sword: false
+give-sword-delay-ticks: 10
+
+# Heal the player to full health whenever they receive the kit (join / respawn / teleport in).
+heal-on-join: true
+
+# Small grace period (in ticks, 20 ticks = 1 second) before the enable/disable countdown
+# actually starts after picking up / letting go of the sword. This stops the countdown from
+# firing just because a player quickly scrolled past the sword's hotbar slot.
+# Set to 0 to make it react instantly (old behaviour).
+held-item-debounce-ticks: 4
+
+# If true (default): the armor is put on when the enable-countdown finishes, and taken back
+# off (sword stays, only the armor comes off) when the disable-countdown finishes.
+# If false: armor is given once on join/respawn and always stays on regardless of PvP state.
+armor-follows-pvp-toggle: true
+
+# Plays a small sound when the armor gets equipped (on join, or when re-enabling PvP).
+equip-sound:
+  enable: true
+  sound: ITEM_ARMOR_EQUIP_DIAMOND
+
+# --------------------------------------------------
+# Branding
+# --------------------------------------------------
+
+# An extra lore line added to every kit item (sword + armor).
+branding:
+  item-lore:
+    enable: true
+    text: "&8LobbyPvP by &7Smith the CEO of Asooner"
+
+# --------------------------------------------------
+# Compatibility
+# --------------------------------------------------
+
+# If any kit piece somehow goes missing while a player is in an active world (a client
+# desync, another plugin briefly touching their gear, etc.), silently put it back without
+# touching anything that's already there. Checked every "interval-ticks".
+kit-watchdog:
+  enable: true
+  interval-ticks: 40
+
+# If you use ajParkour: while a player is inside an active ajParkour session, LobbyPvP will
+# not give or take the kit at all (it won't fight over the inventory with ajParkour's own
+# clear/restore). This is detected automatically through ajParkour's API - no setup needed,
+# it simply does nothing if ajParkour isn't installed.
+ajparkour-compatibility:
+  enable: true
+
+# If enabled: when BOTH players in a fight have PvP armed (holding the sword, past the
+# enable countdown), LobbyPvP forces the hit through even if another plugin (region
+# protection, anti-pvp zones, etc.) already blocked it. Turn this off if you'd rather let
+# other protection plugins have the final say.
+force-override-other-protections: true
+
+# --------------------------------------------------
+# Worlds
+# --------------------------------------------------
+
+# The plugin will NOT work in these worlds (ignored if whitelist mode is on).
+disabled-worlds:
+  - world_nether
+  - world_the_end
+
+# If enabled, the plugin ONLY works inside the worlds listed below.
+# Useful if you have one lobby world and lots of survival/game worlds.
+worlds-white-list-mode:
+  enable: false
+  white-list-worlds:
+    - world
+
+# --------------------------------------------------
+# Right-click ability
+# --------------------------------------------------
+
+right-click-ability:
+  enable: true
+  cooldown: 15
+
+  speed:
+    duration: 5
+    amplifier: 0
+  strength:
+    duration: 5
+    amplifier: 0
+
+  # Live cooldown indicator while the ability recharges, plus a sound when it's ready again.
+  # mode: "actionbar" (text) or "xp-bar" (uses the player's XP bar as a progress meter).
+  cooldown-display:
+    enable: true
+    mode: actionbar
+    ready-sound: ENTITY_EXPERIENCE_ORB_PICKUP
+
+# --------------------------------------------------
+# Kill effects
+# --------------------------------------------------
+
+# Gives the speed + strength effects above (from right-click-ability) to whoever gets a kill.
+speed-strength-on-kill:
+  enable: true
+
+# Gives a regeneration effect to whoever gets a kill.
+regeneration-on-kill:
+  enable: true
+  duration: 5
+  amplifier: 2
+
+# Strikes the dead player with a purely visual lightning bolt (does not deal extra damage).
+lightning-effect-on-kill:
+  enable: true
+
+# A small particle burst at the death location, purely visual.
+kill-particles:
+  enable: true
+  particle: FLAME
+  count: 30
+
+# Clears the victim's drops/exp orbs on death so the lobby doesn't get cluttered with kit items.
+clear-drops-on-death: true
+
+# Where the per-second "PvP enabling/disabling in X seconds" messages show up.
+# mode: "chat" (normal chat message with prefix), "actionbar", or "title" (big on-screen text).
+countdown-message-display:
+  mode: chat
+
+# Where the final "PvP enabled!" / "PvP disabled!" message shows up once the countdown ends.
+# Same mode options as above.
+state-message-display:
+  mode: actionbar
+
+# --------------------------------------------------
+# Sounds
+# --------------------------------------------------
+
+# Played on the player each second while the enable/disable countdown is running.
+pvp-activation-deactivation-countdown-sound:
+  enable: true
+  sound: BLOCK_WOODEN_BUTTON_CLICK_ON
+
+# --------------------------------------------------
+# Messages
+# --------------------------------------------------
+# Leave any value as "" (empty) to hide that message entirely.
+# Colour codes use '&', e.g. &a = green.
+
+lang:
+  prefix: "&b⚔ LobbyPvP &6>>> "
+  pvp-enabled: "&6&l>&r&a PvP enabled!"
+  pvp-enabling: "&aPvP enabling in &f%time%&a second(s)."
+  pvp-disabled: "&6&l>&r&c PvP disabled!"
+  pvp-disabling: "&cPvP disabling in &f%time%&c second(s)."
+  reloaded: "&aSuccessfully reloaded the LobbyPvP config!"
+  disabled-in-world: "&cYou may not use this here!"
+  no-permission: "&cYou don't have permission to do that!"
+  kill-message: "&6>>> &a%victim% &fwas killed by &c%killer% &7(session kills: &e%kills%&7)"
+  ability-activate: "&aYou've gained extra &6damage &aand &6speed&a!"
+  ability-on-cooldown: "&cYour ability is still on cooldown! (&f%time%s&c)"
+  usage: "&cUnknown subcommand. Use /lobbypvp help"
+
+# --------------------------------------------------
+# Item customisation
+# --------------------------------------------------
+# material: ANY valid Bukkit Material name. Some examples you can drop straight in:
+#   Sword:   WOODEN_SWORD, STONE_SWORD, IRON_SWORD, GOLDEN_SWORD, DIAMOND_SWORD, NETHERITE_SWORD
+#   Helmet:  LEATHER_HELMET, GOLDEN_HELMET, IRON_HELMET, DIAMOND_HELMET, NETHERITE_HELMET, TURTLE_HELMET
+#   Chest:   LEATHER_CHESTPLATE, GOLDEN_CHESTPLATE, IRON_CHESTPLATE, DIAMOND_CHESTPLATE, NETHERITE_CHESTPLATE
+#   Leggings/Boots: same pattern, e.g. GOLDEN_LEGGINGS, NETHERITE_BOOTS...
+# name: the item's display name (colour codes with '&')
+# Set enable: false on an armor piece to skip giving it entirely.
+
+items:
+  weapon:
+    slot: 4
+    material: DIAMOND_SWORD
+    name: "&aPvP Sword &e(Hold to PvP)"
+    unbreakable: true
+    # Level of the Sharpness enchant. Set to 0 to disable.
+    sharpness: 1
+
+  helmet:
+    enable: true
+    material: DIAMOND_HELMET
+    name: "&aPvP Helmet"
+    unbreakable: true
+    # Level of the Protection enchant. Set to 0 to disable.
+    protection: 1
+
+  chestplate:
+    enable: true
+    material: DIAMOND_CHESTPLATE
+    name: "&aPvP Chestplate"
+    unbreakable: true
+    protection: 1
+
+  leggings:
+    enable: true
+    material: DIAMOND_LEGGINGS
+    name: "&aPvP Leggings"
+    unbreakable: true
+    protection: 1
+
+  boots:
+    enable: true
+    material: DIAMOND_BOOTS
+    name: "&aPvP Boots"
+    unbreakable: true
+    protection: 1
