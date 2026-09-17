@@ -1,0 +1,134 @@
+# ============================================================
+# Smithpvp configuration
+# ============================================================
+
+general:
+  # Useful when another lobby/inventory plugin edits inventory right after join.
+  delayed-sword-give:
+    enabled: true
+    delay-ticks: 10
+  heal-on-join: true
+  kit-watchdog:
+    enabled: false
+    interval-ticks: 40
+
+worlds:
+  # When true, Smithpvp works ONLY in enabled-worlds.
+  whitelist-mode: false
+  enabled-worlds:
+    - world
+  # Used when whitelist-mode is false.
+  disabled-worlds:
+    - world_nether
+    - world_the_end
+
+compatibility:
+  ajparkour:
+    enabled: true
+  force-override-other-protections: true
+
+pvp:
+  enable-cooldown-seconds: 3
+  disable-cooldown-seconds: 3
+  held-item-debounce-ticks: 4
+
+  # Hotbar slot selected after respawn. Valid values: 0-8.
+  post-death-slot: 0
+
+  armor:
+    # true = armor exists only while PvP is actually enabled.
+    follows-pvp-state: true
+    sounds:
+      equip:
+        enabled: true
+        type: ITEM_ARMOR_EQUIP_DIAMOND
+      unequip:
+        enabled: true
+        type: ITEM_ARMOR_EQUIP_DIAMOND
+
+  display:
+    countdown: chat
+    state: actionbar
+
+  countdown-sound:
+    enabled: true
+    type: BLOCK_WOODEN_BUTTON_CLICK_ON
+
+items:
+  branding-lore:
+    enabled: true
+    text: "&8Smithpvp by &7Smith the CEO of Asooner"
+  weapon:
+    slot: 4
+    material: DIAMOND_SWORD
+    name: "&aPvP Sword &e(Hold to PvP)"
+    unbreakable: true
+    sharpness: 1
+  helmet:
+    enabled: true
+    material: DIAMOND_HELMET
+    name: "&aPvP Helmet"
+    unbreakable: true
+    protection: 1
+  chestplate:
+    enabled: true
+    material: DIAMOND_CHESTPLATE
+    name: "&aPvP Chestplate"
+    unbreakable: true
+    protection: 1
+  leggings:
+    enabled: true
+    material: DIAMOND_LEGGINGS
+    name: "&aPvP Leggings"
+    unbreakable: true
+    protection: 1
+  boots:
+    enabled: true
+    material: DIAMOND_BOOTS
+    name: "&aPvP Boots"
+    unbreakable: true
+    protection: 1
+
+right-click-ability:
+  enabled: true
+  cooldown-seconds: 15
+  speed:
+    duration-seconds: 5
+    amplifier: 0
+  strength:
+    duration-seconds: 5
+    amplifier: 0
+  cooldown-display:
+    enabled: true
+    mode: actionbar
+    ready-sound: ENTITY_EXPERIENCE_ORB_PICKUP
+
+kill-effects:
+  full-heal: true
+  speed-strength:
+    enabled: true
+  regeneration:
+    enabled: true
+    duration-seconds: 5
+    amplifier: 2
+  lightning:
+    enabled: true
+  particles:
+    enabled: true
+    type: FLAME
+    count: 30
+  clear-drops-and-exp: true
+
+messages:
+  prefix: "&b⚔ Smithpvp &6>>> "
+  pvp-enabled: "&6&l>&r&a PvP enabled!"
+  pvp-enabling: "&aPvP enabling in &f%time%&a second(s)."
+  pvp-disabled: "&6&l>&r&c PvP disabled!"
+  pvp-disabling: "&cPvP disabling in &f%time%&c second(s)."
+  reloaded: "&aSuccessfully reloaded the Smithpvp config!"
+  disabled-in-world: "&cYou may not use this here!"
+  no-permission: "&cYou don't have permission to do that!"
+  kill-message: "&6>>> &a%victim% &fwas killed by &c%killer% &7(session kills: &e%kills%&7)"
+  ability-activate: "&aYou've gained extra &6damage &aand &6speed&a!"
+  ability-on-cooldown: "&cYour ability is still on cooldown! (&f%time%s&c)"
+  usage: "&cUnknown subcommand. Use /smithpvp help"
