@@ -1,0 +1,17 @@
+name: Smithpvp
+version: '${project.version}'
+main: us.asooner.smithpvp.SmithPvPPlugin
+api-version: '1.21'
+authors: [ "Smith the CEO of Asooner" ]
+softdepend: [ ajParkour, PlaceholderAPI, Multiverse-Inventories ]
+description: Smithpvp - configurable lobby PvP with hold-to-toggle combat, abilities and kill effects.
+commands:
+  smithpvp:
+    aliases: [ spvp, smp ]
+    description: Smithpvp core command.
+    usage: /smithpvp <help|reload>
+permissions:
+  smithpvp.reload:
+    default: op
+  smithpvp.bypass:
+    default: false
